@@ -44,6 +44,7 @@ The following manifest files will be used to build our environment:
 COMP10619:pejman.tabassomi$ kubectl apply -f zookeeper-service.yml
 COMP10619:pejman.tabassomi$ kubectl apply -f zookeeper-deployment.yml
 COMP10619:pejman.tabassomi$ kubectl apply -f kafka-service.yml
+COMP10619:pejman.tabassomi$ kubectl apply -f kafka-deployment.yml
 COMP10619:pejman.tabassomi$ kubectl apply -f springkafka.yml
 ```
 
