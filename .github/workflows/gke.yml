@@ -3,7 +3,7 @@ name: Build and Deploy to GKE
 on:
   push:
     branches:
-    - dockerfile
+    - dockerpull
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -34,49 +34,8 @@ jobs:
         java-version: '11'
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
-    - name: Running gcloud commands 
-      run: |-
-        gcloud --quiet auth configure-docker
-        # Get the GKE credentials so we can deploy to the cluster
-        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
-        gcloud info
     - name: Build docker image to local registry 
       run: |-
-        docker build -f Dockerfile.springkafka -t springkafka .
+        sudo docker build -f Dockerfile.springkafka -t springkafka .
         # Include docker push to docker hub   
-    # Build the Docker image
-    - name: Build
-#      run: |-
-#        docker build \
-#          --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
-#          --build-arg GITHUB_SHA="$GITHUB_SHA" \
-#          --build-arg GITHUB_REF="$GITHUB_REF" \
-#          .
-      run: |-
-        wget https://get.helm.sh/helm-v3.0.2-linux-amd64.tar.gz
-        tar xvf helm-v3.0.2-linux-amd64.tar.gz
-        sudo mv linux-amd64/helm /usr/local/bin
-        sudo rm -rf linux-amd64 helm-v3.0.2-linux-amd64.tar.gz
-        sudo helm repo add stable https://kubernetes-charts.storage.googleapis.com/
-        sudo helm repo update
-        sudo helm version
-        kubectl get pods -o wide
-        java -version
-        
     
-    # Push the Docker image to Google Container Registry
-#    - name: Publish
-#      run: |-
-#        docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
-    # Set up kustomize
-#    - name: Set up Kustomize
-#      run: |-
-#        curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
-#        chmod u+x ./kustomize
-    # Deploy the Docker image to the GKE cluster
-#    - name: Deploy
-#      run: |-
-#        ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
-#        ./kustomize build . | kubectl apply -f -
-#        kubectl rollout status deployment/$IMAGE
-#        kubectl get services -o wide
