@@ -3,7 +3,7 @@ name: Build and Deploy to GKE
 on:
   push:
     branches:
-    - master
+    - dockerfile
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -47,6 +47,13 @@ jobs:
 #          --build-arg GITHUB_REF="$GITHUB_REF" \
 #          .
       run: |-
+        wget https://get.helm.sh/helm-v3.0.2-linux-amd64.tar.gz
+        tar xvf helm-v3.0.2-linux-amd64.tar.gz
+        mv linux-amd64/helm /usr/local/bin
+        rm -rf linux-amd64 helm-v3.0.2-linux-amd64.tar.gz
+        helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+        helm repo update
+        helm version
         gcloud info
         kubectl get pods -o wide
         java -version
