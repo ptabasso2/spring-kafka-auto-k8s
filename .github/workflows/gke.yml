@@ -34,12 +34,16 @@ jobs:
         java-version: '11'
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
-    - run: |-
+    - name: Running gcloud commands 
+      run: |-
         gcloud --quiet auth configure-docker
-    # Get the GKE credentials so we can deploy to the cluster
-    - run: |-
+        # Get the GKE credentials so we can deploy to the cluster
         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
         gcloud info
+    - name: Build docker image to local registry 
+      run: |-
+        docker build -f Dockerfile.springkafka -t springkafka .
+        # Include docker push to docker hub   
     # Build the Docker image
     - name: Build
 #      run: |-
