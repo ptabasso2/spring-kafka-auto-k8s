@@ -33,11 +33,11 @@ jobs:
         java-version: '11'
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
-    ##- run: |-
-    ##    gcloud --quiet auth configure-docker
+    - run: |-
+        gcloud --quiet auth configure-docker
     # Get the GKE credentials so we can deploy to the cluster
-    ##- run: |-
-    ##    gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+    - run: |-
+        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
     # Build the Docker image
     - name: Build
 #      run: |-
@@ -54,8 +54,8 @@ jobs:
         sudo helm repo add stable https://kubernetes-charts.storage.googleapis.com/
         sudo helm repo update
         sudo helm version
-        #gcloud info
-        #kubectl get pods -o wide
+        gcloud info
+        kubectl get pods -o wide
         java -version
         
     
