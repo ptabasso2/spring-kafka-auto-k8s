@@ -59,7 +59,7 @@ jobs:
         
     - name: Build docker image to local registry 
       run: |-
-        docker build -f Dockerfile.springkafka -t pejdd/spk:v0 .
+        docker build -f Dockerfile.springkafka -t pejdd/springkafka:v1 .
         docker login -u=pejdd -p=$DH_PWD
         docker push pejdd/spk:v0
 
