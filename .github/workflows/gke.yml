@@ -35,9 +35,18 @@ jobs:
         java-version: '11'
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
+    
+      
     - name: Build docker image to local registry 
-      run: |-
-        docker login -u=pejdd -p=$DH_PWD
+      uses: docker/build-push-action@v1
+      with:
+        username: pejdd
+        password: ${{ secrets.DOCKERHUB_PWD }}
+      # repository: pejdd/myrepository
+      # tags: latest
+
+    - run: |-
+        docker login -u=pejdd -p=$password
         docker build -f Dockerfile.springkafka -t springkafka .
         # Include docker push to docker hub   
     
