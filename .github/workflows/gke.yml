@@ -49,13 +49,13 @@ jobs:
       run: |-
         wget https://get.helm.sh/helm-v3.0.2-linux-amd64.tar.gz
         tar xvf helm-v3.0.2-linux-amd64.tar.gz
-        mv linux-amd64/helm /usr/local/bin
-        rm -rf linux-amd64 helm-v3.0.2-linux-amd64.tar.gz
-        helm repo add stable https://kubernetes-charts.storage.googleapis.com/
-        helm repo update
-        helm version
-        gcloud info
-        kubectl get pods -o wide
+        sudo mv linux-amd64/helm /usr/local/bin
+        sudo rm -rf linux-amd64 helm-v3.0.2-linux-amd64.tar.gz
+        sudo helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+        sudo helm repo update
+        sudo helm version
+        #gcloud info
+        #kubectl get pods -o wide
         java -version
         
     
