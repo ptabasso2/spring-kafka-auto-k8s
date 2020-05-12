@@ -61,7 +61,7 @@ jobs:
       run: |-
         docker build -f Dockerfile.springkafka -t pejdd/springkafka:v1 .
         docker login -u=pejdd -p=$DH_PWD
-        docker push pejdd/spk:v0
+        docker push pejdd/springkafka:v1
 
     - name: Build
       run: |-
