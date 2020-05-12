@@ -9,6 +9,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: pejman-sncf-cluster-1   # TODO: update to cluster name
   GKE_ZONE: europe-west3-a  # TODO: update to cluster zone
+  DH_PWD: ${{ secrets.DOCKERHUB_PWD }}
   IMAGE: static-site
 
 jobs:
@@ -36,6 +37,7 @@ jobs:
     # helper for authentication
     - name: Build docker image to local registry 
       run: |-
-        sudo docker build -f Dockerfile.springkafka -t springkafka .
+        docker login -u=pejdd -p=$DH_PWD
+        docker build -f Dockerfile.springkafka -t springkafka .
         # Include docker push to docker hub   
     
