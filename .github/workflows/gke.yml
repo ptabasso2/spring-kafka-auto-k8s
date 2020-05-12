@@ -75,4 +75,4 @@ jobs:
         kubectl get pods -o wide
         java -version
         # Include docker push to docker hub   
-        helm install --dry-run --debug --name sk ./helm/
+        helm install --dry-run --debug sk ./helm/
