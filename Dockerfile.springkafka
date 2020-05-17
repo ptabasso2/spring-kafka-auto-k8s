@@ -1,8 +1,7 @@
-#FROM pejdd/pgbase:v1
 FROM adoptopenjdk/openjdk11:ubuntu-nightly-slim
 
 RUN apt update \
- && apt -y install net-tools iputils-ping curl vim procps netcat wget gnupg2 apt-transport-https sudo
+ && apt -y install net-tools iputils-ping curl vim procps netcat wget gnupg2 apt-transport-https sudo lsof unzip
 
 RUN mkdir /app
 WORKDIR /app
