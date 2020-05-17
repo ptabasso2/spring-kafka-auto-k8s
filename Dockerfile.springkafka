@@ -1,4 +1,3 @@
-#FROM pejdd/pgbase:v1
 FROM adoptopenjdk/openjdk11:ubuntu-nightly-slim
 
 RUN apt update \
