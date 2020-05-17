@@ -26,6 +26,8 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
+          - name: KAFKA_BROKER
+            value: kafka
         ports:
           - containerPort: 8088
 ---
