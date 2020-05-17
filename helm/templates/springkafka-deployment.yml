@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.app.name }}
 spec:
-  replicas: 4
+  replicas: 1
   minReadySeconds: 15
   strategy:
     type: RollingUpdate
@@ -24,5 +24,7 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
+          - name: KAFKA_BROKER
+            value: {{ .Values.kafka.name }}
         ports:
           - containerPort: {{ .Values.service.targetPort }}
